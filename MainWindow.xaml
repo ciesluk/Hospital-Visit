@@ -1,0 +1,115 @@
+﻿<Window x:Class="HospitalCharges.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HospitalCharges"
+        mc:Ignorable="d"
+        Title="Hospital Visit Calculator" Height="600" Width="800" Icon="Images/hospital_icon.ico">
+    <Window.Resources>
+        <!-- Styles for the Title of the Application-->
+        <Style x:Key="TitleLabel" TargetType="Label">
+            <Setter Property="Margin" Value="110 5"/>
+            <Setter Property="Content" Value="Hospital Visit Calculator"/>
+            <Setter Property="FontSize" Value="42"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Green"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="4"/>
+            <Setter Property="Background" Value="LightGray"/>
+        </Style>
+        <!--Styles for all the Label Charges-->
+        <Style x:Key="ChargesLabel" TargetType="Label">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="HorizontalContentAlignment" Value="Right"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+        <!--Styles for all the User Input Textboxes-->
+        <Style x:Key="InputCharges" TargetType="TextBox">
+            <Setter Property="Margin" Value="20 5"/>
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+        <!--Styles for the Results Label-->
+        <Style x:Key="ResultsLabel" TargetType="Label">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontSize" Value="40"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="BorderBrush" Value="Yellow"/>
+            <Setter Property="BorderThickness" Value="6"/>
+            <Setter Property="Background" Value="LightYellow"/>
+        </Style>
+        <!--Styles for the Calculate Button-->
+        <Style x:Key="TotalButton" TargetType="Button">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Background" Value="LightGreen"/>
+            <Setter Property="BorderBrush" Value="Green"/>
+            <Setter Property="BorderThickness" Value="5"/>
+        </Style>
+        <!--Styles for the Clear Button-->
+        <Style x:Key="ResetButton" TargetType="Button">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Background" Value="LightCoral"/>
+            <Setter Property="BorderBrush" Value="Red"/>
+            <Setter Property="BorderThickness" Value="5"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <!--Row Definitions - 8 rows-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <!--Column Definitions - 4 columns-->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <!--Background Image that will span all the columns and rows-->
+        <Image Source="Images/hospital_background.jpg" Grid.ColumnSpan="4" Grid.RowSpan="8" Stretch="Fill"></Image>
+
+        <!--Title Label-->
+        <Label Name="Title" Grid.Row="0" Grid.ColumnSpan="4" Style="{StaticResource TitleLabel}"></Label>
+        
+        <!--Number of days stayed, medication charge, surgical charge, lab charge, rehab charge labels-->
+        <Label Name="DaysAtHospital" Content="Number of days in hospital" Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource ChargesLabel}"></Label>
+        <Label Name="MedicationCost" Content="Medication Charges" Grid.Row="2" Grid.ColumnSpan="2" Style="{StaticResource ChargesLabel}"></Label>
+        <Label Name="SurgeryCost" Content="Surgical Charges" Grid.Row="3" Grid.ColumnSpan="2" Style="{StaticResource ChargesLabel}"></Label>
+        <Label Name="LabCost" Content="Lab Fees" Grid.Row="4" Grid.ColumnSpan="2" Style="{StaticResource ChargesLabel}"></Label>
+        <Label Name="RehabCost" Content="Rehabilitation Charges" Grid.Row="5" Grid.ColumnSpan="2" Style="{StaticResource ChargesLabel}"></Label>
+
+        <!--Number of days stayed, medication charge, surgical charge, lab charge, rehab charge textboxes for user input-->
+        <TextBox Grid.Column="2" Grid.Row="1" Style="{StaticResource InputCharges}" Text="{Binding QuantityStays}"></TextBox>
+        <TextBox Grid.Column="2" Grid.Row="2" Style="{StaticResource InputCharges}" Text="{Binding MedicationAmount}"></TextBox>
+        <TextBox Grid.Column="2" Grid.Row="3" Style="{StaticResource InputCharges}" Text="{Binding SurgeryAmount}"></TextBox>
+        <TextBox Grid.Column="2" Grid.Row="4" Style="{StaticResource InputCharges}" Text="{Binding LabAmount}"></TextBox>
+        <TextBox Grid.Column="2" Grid.Row="5" Style="{StaticResource InputCharges}" Text="{Binding RehabAmount}"></TextBox>
+
+        <!--The results label that will display the total of all the charges-->
+        <Label Grid.Row="6" Grid.ColumnSpan="4" Style="{StaticResource ResultsLabel}" Content="{Binding Results}"></Label>
+
+        <!--The calculate button to get the total and the clear button to reset everything-->
+        <Button Name="TotalStay" Content="Calculate" Grid.Row="7" Grid.Column="1" Style="{StaticResource TotalButton}" Click="TotalStay_Click"></Button>
+        <Button Name="Reset" Content="Reset" Grid.Row="7" Grid.Column="2" Style="{StaticResource ResetButton}" Click="Reset_Click"></Button>
+    </Grid>
+</Window>
